@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # امنع الوصول للملفات الحساسة
+    RewriteRule ^(\.git|\.env|vendor|database|app|config|routes|tests|bootstrap|resources)(/|$) - [F,L]
+    RewriteRule ^(composer\.(json|lock)|artisan|README\.md|phpunit\.xml)$ - [F,L]
+
+    # Don't rewrite existing files/directories in the root
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
